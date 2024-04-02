@@ -79,6 +79,14 @@ const SignUp2View = ({navigation}) => {
     navigation.goBack();
   }, []);
 
+  const onClickAgree = useCallback(() => {
+    navigation.navigate({
+      name: 'SignUp',
+      params: {firstChecked: undefined, secondChecked: true},
+      merge: true,
+    });
+  }, []);
+
   return (
     <View style={styles.mainContainer}>
       <View style={styles.headerContainer}>
@@ -86,7 +94,7 @@ const SignUp2View = ({navigation}) => {
           style={{
             width: '100%',
           }}>
-          <Text style={styles.headerText}>개인정보처리방침</Text>
+          <Text style={styles.headerText}>이용약관</Text>
         </View>
         <TouchableOpacity
           style={styles.close}
@@ -127,7 +135,9 @@ const SignUp2View = ({navigation}) => {
           style={{
             width: '100%',
           }}
-          onPress={() => {}}>
+          onPress={() => {
+            onClickAgree();
+          }}>
           <Text style={styles.footerText}>동의</Text>
         </TouchableOpacity>
       </View>

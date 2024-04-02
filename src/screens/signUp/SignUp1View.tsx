@@ -83,7 +83,7 @@ const SignUp1View = ({navigation}) => {
   const onClickAgree = useCallback(() => {
     navigation.navigate({
       name: 'SignUp',
-      params: {firstChecked: true},
+      params: {firstChecked: true, secondChecked: undefined},
       merge: true,
     });
   }, []);

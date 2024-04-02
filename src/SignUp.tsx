@@ -158,9 +158,6 @@ const SignUp = ({navigation, route}) => {
     if (allChecked) {
       setFirstChecked(true);
       setSecondChecked(true);
-    } else {
-      setFirstChecked(false);
-      setSecondChecked(false);
     }
   }, [allChecked]);
 
@@ -168,9 +165,15 @@ const SignUp = ({navigation, route}) => {
     navigation.navigate('SignUp1View');
   }, []);
 
+  const goSignUp2 = useCallback(() => {
+    navigation.navigate('SignUp2View');
+  }, []);
+
   useEffect(() => {
     console.log(route.params);
-    setFirstChecked(route.params?.firstChecked);
+    route.params?.firstChecked && setFirstChecked(route.params?.firstChecked);
+    route.params?.secondChecked &&
+      setSecondChecked(route.params?.secondChecked);
   }, [route.params]);
 
   useEffect(() => {
@@ -187,8 +190,7 @@ const SignUp = ({navigation, route}) => {
 
   const onCickCompleted = useCallback((isAllChecked: boolean) => {
     if (isAllChecked) {
-    } else {
-      Alert.alert('동의해주세요');
+      navigation.navigate('HomeView');
     }
   }, []);
 
@@ -221,9 +223,10 @@ const SignUp = ({navigation, route}) => {
             </Text>
           </View>
           <View style={styles.infoContainer2}>
-            <Text style={styles.infoText2}>닉네임</Text>
+            <Text style={styles.infoText2}>닉네임*</Text>
             <View style={{flexDirection: 'row', height: 42, marginTop: 8}}>
               <TextInput
+                value="행복한고양이"
                 style={{
                   width: 240,
                   borderWidth: 1,
@@ -247,7 +250,7 @@ const SignUp = ({navigation, route}) => {
             </Text>
           </View>
           <View style={styles.infoContainer3}>
-            <Text style={styles.infoText3}>나이</Text>
+            <Text style={styles.infoText3}>나이*</Text>
             <View
               style={{
                 flexDirection: 'row',
@@ -274,7 +277,7 @@ const SignUp = ({navigation, route}) => {
             </View>
           </View>
           <View style={styles.infoContainer4}>
-            <Text style={styles.infoText4}>성별</Text>
+            <Text style={styles.infoText4}>성별*</Text>
             <RadioButton.Group
               onValueChange={newValue => setChecked(newValue)}
               value={checked}>
@@ -357,7 +360,9 @@ const SignUp = ({navigation, route}) => {
                 }}
                 checkBoxColor="#7260FF"
                 onClick={() => {
-                  setAllChecked(!allChecked);
+                  if (allChecked) {
+                    setAllChecked(!allChecked);
+                  }
                 }}
                 rightText="전체 약관에 동의합니다."
               />
@@ -435,7 +440,11 @@ const SignUp = ({navigation, route}) => {
                 }}
                 checkBoxColor="#7260FF"
                 onClick={() => {
-                  setSecondChecked(!secondChecked);
+                  if (secondChecked) {
+                    setSecondChecked(false);
+                  } else {
+                    goSignUp2();
+                  }
                 }}
                 rightText="[필수] 이용약관"
               />
@@ -459,11 +468,16 @@ const SignUp = ({navigation, route}) => {
           </View>
         </View>
       </View>
-      <View style={styles.footerContainer}>
+      <View
+        style={[
+          styles.footerContainer,
+          !allChecked && {backgroundColor: '#D9D9D9'},
+        ]}>
         <TouchableOpacity
           style={{
             width: '100%',
           }}
+          disabled={allChecked ? false : true}
           onPress={() => {
             onCickCompleted(allChecked);
           }}>

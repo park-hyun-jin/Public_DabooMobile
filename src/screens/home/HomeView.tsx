@@ -43,8 +43,8 @@ const HomeView = () => {
       <View style={{backgroundColor: '#F5FCEF', width: '100%', height: 300}}>
         <View
           style={{
-            paddingTop: 10,
-            paddingLeft: 10,
+            paddingTop: 20,
+            left: 20,
             position: 'absolute',
             zIndex: 3,
           }}>
@@ -57,13 +57,32 @@ const HomeView = () => {
             source={require('../../assets/home.png')}
           />
         </View>
+        <View
+          style={{
+            paddingTop: 20,
+            right: 20,
+            position: 'absolute',
+            zIndex: 3,
+          }}>
+          <Image source={require('../../assets/notification.png')} />
+        </View>
       </View>
-      <View style={{alignItems: 'center'}}>
+      <View style={{alignItems: 'center', backgroundColor: '#F5FCF0'}}>
         <Image
           width={Dimensions.get('window').width}
           height={80}
           source={require('../../assets/home-topview.png')}
         />
+        <View
+          style={{
+            borderTopLeftRadius: 16,
+            borderTopRightRadius: 16,
+            borderTopWidth: 0.1,
+            borderColor: '#212121',
+            backgroundColor: '#/',
+            height: 80,
+            width: '100%',
+          }}></View>
       </View>
 
       <View style={{marginTop: 30, paddingHorizontal: 10}}>
