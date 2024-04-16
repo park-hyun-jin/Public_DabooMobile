@@ -17,6 +17,7 @@ import {
   TouchableWithoutFeedback,
   TouchableOpacity,
 } from 'react-native';
+import useStore from './zustand/store';
 const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
@@ -48,11 +49,12 @@ const styles = StyleSheet.create({
 });
 
 const DabooMain = ({navigation}) => {
+  const {setAccessToken} = useStore(state => state);
   const url = 'https://dev.da-boo.shop';
   const getData = useCallback(async (accessToken: string) => {
     console.log(accessToken);
 
-    return await axios.get<{data: string}>(`${url}/oauth/token/KAKAO`, {
+    return await axios.get<any>(`${url}/oauth/token/KAKAO`, {
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
@@ -69,6 +71,7 @@ const DabooMain = ({navigation}) => {
       const response = await getData(token.accessToken);
       console.log(response);
       if (response.status == 200) {
+        setAccessToken(response.data.accessToken);
         navigation.navigate('SignUp', response.data);
       }
     } catch (e) {}
