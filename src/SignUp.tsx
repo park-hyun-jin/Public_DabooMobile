@@ -146,6 +146,7 @@ const SignUp = ({navigation, route}) => {
   const [allChecked, setAllChecked] = useState<boolean>(false);
   const [firstChecked, setFirstChecked] = useState<boolean>(false);
   const [secondChecked, setSecondChecked] = useState<boolean>(false);
+  const [nickname, setNickname] = useState<string>('김다부');
   useEffect(() => {
     if (firstChecked && secondChecked) {
       setAllChecked(true);
@@ -182,6 +183,7 @@ const SignUp = ({navigation, route}) => {
       tmpArr.push(i.toString());
     }
     setItems(tmpArr.reverse());
+    setNickname(route.params?.nickname);
   }, []);
 
   const goBackMain = useCallback(() => {
@@ -226,7 +228,7 @@ const SignUp = ({navigation, route}) => {
             <Text style={styles.infoText2}>닉네임*</Text>
             <View style={{flexDirection: 'row', height: 42, marginTop: 8}}>
               <TextInput
-                value="행복한고양이"
+                value={nickname}
                 style={{
                   width: 240,
                   borderWidth: 1,

@@ -65,18 +65,18 @@ const DabooMain = ({navigation}) => {
 
     console.log(JSON.stringify(token));
 
-    const response = await getData(token.accessToken);
-    console.log(response.data);
     try {
+      const response = await getData(token.accessToken);
+      console.log(response);
       if (response.status == 200) {
-        response.data;
+        navigation.navigate('SignUp', response.data);
       }
     } catch {}
   };
 
   const startKakao = useCallback(() => {
-    navigation.navigate('SignUp');
-    return;
+    // navigation.navigate('SignUp');
+    // return;
     signInWithKakao();
   }, []);
 
