@@ -71,7 +71,7 @@ const DabooMain = ({navigation}) => {
       if (response.status == 200) {
         navigation.navigate('SignUp', response.data);
       }
-    } catch {}
+    } catch (e) {}
   };
 
   const startKakao = useCallback(() => {
