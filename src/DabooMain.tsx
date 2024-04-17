@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
 });
 
 const DabooMain = ({navigation}) => {
-  const {setAccessToken} = useStore(state => state);
+  const {setAccessToken, setRefreshToken} = useStore(state => state);
   const url = 'https://dev.da-boo.shop';
   const getData = useCallback(async (accessToken: string) => {
     console.log(accessToken);
@@ -72,6 +72,7 @@ const DabooMain = ({navigation}) => {
       console.log(response);
       if (response.status == 200) {
         setAccessToken(response.data.accessToken);
+        setRefreshToken(response.data.refreshToken);
         navigation.navigate('SignUp', response.data);
       }
     } catch (e) {}
