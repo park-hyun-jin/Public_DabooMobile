@@ -6,7 +6,7 @@ import {
   getProfile,
   login,
 } from '@react-native-seoul/kakao-login';
-import axios from 'axios';
+import {axiosGet} from './common/axios';
 import {useCallback} from 'react';
 import {
   View,
@@ -50,16 +50,11 @@ const styles = StyleSheet.create({
 
 const DabooMain = ({navigation}) => {
   const {setAccessToken, setRefreshToken} = useStore(state => state);
-  const url = 'https://dev.da-boo.shop';
+  const {accessToken, refreshToken} = useStore(state => state);
   const getData = useCallback(async (accessToken: string) => {
     console.log(accessToken);
 
-    return await axios.get<any>(`${url}/oauth/token/KAKAO`, {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
-      withCredentials: true,
-    });
+    return await axiosGet('oauth/token/KAKAO', '', accessToken);
   }, []);
 
   const signInWithKakao = async (): Promise<void> => {
@@ -69,7 +64,6 @@ const DabooMain = ({navigation}) => {
 
     try {
       const response = await getData(token.accessToken);
-      console.log(response);
       if (response.status == 200) {
         setAccessToken(response.data.accessToken);
         setRefreshToken(response.data.refreshToken);

@@ -14,6 +14,8 @@ import {
 } from 'react-native';
 import {RadioButton} from 'react-native-paper';
 import CheckBox from 'react-native-check-box';
+import {axiosGet, axiosPost} from './common/axios';
+import useStore from './zustand/store';
 
 const styles = StyleSheet.create({
   mainContainer: {
@@ -147,6 +149,9 @@ const SignUp = ({navigation, route}) => {
   const [firstChecked, setFirstChecked] = useState<boolean>(false);
   const [secondChecked, setSecondChecked] = useState<boolean>(false);
   const [nickname, setNickname] = useState<string>('김다부');
+
+  const accessToken = useStore(state => state.accessToken);
+
   useEffect(() => {
     if (firstChecked && secondChecked) {
       setAllChecked(true);
@@ -196,6 +201,45 @@ const SignUp = ({navigation, route}) => {
     }
   }, []);
 
+  const insertMember = async (): Promise<void> => {
+    // TO-DO
+    const params = {
+      nickname: nickname,
+      // birthYear: birthYear, // Long birthYear
+      // sex: sex,  // MALE or FEMALE
+    };
+
+    try {
+      const response = await axiosPost(
+        'v1/members/profile',
+        params,
+        accessToken,
+      );
+      if (response.status == 200) {
+        console.log(response.data);
+      }
+    } catch (e) {}
+  };
+
+  const checkNickname = async (): Promise<void> => {
+    const params = {
+      nickname: nickname,
+    };
+
+    try {
+      const response = await axiosGet(
+        'v1/members/profile/nickname/check',
+        params,
+        accessToken,
+      );
+      if (response.status == 200) {
+        console.log(response.data);
+        // TO-DO
+        // { duplicate : false } -> 사용 가능
+      }
+    } catch (e) {}
+  };
+
   return (
     <View style={styles.mainContainer}>
       <View style={styles.headerContainer}>
@@ -243,7 +287,8 @@ const SignUp = ({navigation, route}) => {
                   justifyContent: 'center',
                   height: 42,
                   borderRadius: 8,
-                }}>
+                }}
+                onPress={() => checkNickname()}>
                 <Text style={{fontSize: 14, color: 'white'}}>중복확인</Text>
               </TouchableOpacity>
             </View>

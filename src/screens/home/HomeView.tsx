@@ -11,6 +11,8 @@ import {
 } from 'react-native';
 
 import {TabView, TabBar, SceneMap} from 'react-native-tab-view';
+import {axiosGet} from '../../common/axios';
+import useStore from '../../zustand/store';
 
 const styles = StyleSheet.create({
   mainContainer: {
@@ -65,11 +67,88 @@ const HomeView = () => {
     {key: 'first', title: '나의 모임'},
     {key: 'second', title: '모임 둘러보기'},
   ]);
+  const {accessToken} = useStore(state => state);
 
   const renderScene = SceneMap({
     first: FirstRoute,
     second: SecondRoute,
   });
+
+  // 상단 집 모양, 포인트 정보 가져오기
+  const getMyWallet = async (): Promise<void> => {
+    // TO-DO
+    const params = null;
+
+    try {
+      const response = await axiosGet('v1/wallet', params, accessToken);
+      if (response.status == 200) {
+        // data : {
+        //   id,
+        //   member : { id, nickname },
+        //   myHome : {
+        //     id , name, level
+        //   },
+        //   myHomeName,
+        //   point,
+        //   saveAmount,
+        //   updatedAt
+        // }
+        console.log(response.data);
+      }
+    } catch (e) {}
+  };
+
+  // 모임 가져오기
+  const getGathering = async (): Promise<void> => {
+    // TO-DO
+    const params = null;
+
+    // my/{isActive}/{made}    //  isActive: true or false // made: [] or me
+    // {status}/{platform}    //  status: PENDING or ONGOING or COMPLETED // (required = false) platform: TOSS, CASH_WORK, MONIMO, BALSO
+    const endPoint = '';
+
+    try {
+      const response = await axiosGet(
+        'v1/gathering/' + endPoint,
+        params,
+        accessToken,
+      );
+      if (response.status == 200) {
+        // data : {
+        //   id,
+        //   member : { id, nickname },
+        //   myHome : {
+        //     id , name, level
+        //   },
+        //   myHomeName,
+        //   point,
+        //   saveAmount,
+        //   updatedAt
+        // }
+        console.log(response.data);
+      }
+    } catch (e) {}
+  };
+
+  // 플랫폼 정보 가져오기
+  const getPlatform = async (): Promise<void> => {
+    // TO-DO
+    const params = null;
+
+    try {
+      const response = await axiosGet(
+        'v1/gathering/platform',
+        params,
+        accessToken,
+      );
+      if (response.status == 200) {
+        // data : {
+        //   'TOSS', 'CASH_WALK', 'MONIMO', 'BALSO'
+        // }
+        console.log(response.data);
+      }
+    } catch (e) {}
+  };
 
   const renderTabBar = (props: any) => (
     <TabBar
