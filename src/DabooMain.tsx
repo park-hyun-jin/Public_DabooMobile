@@ -73,8 +73,8 @@ const DabooMain = ({navigation}) => {
   };
 
   const startKakao = useCallback(() => {
-    // navigation.navigate('SignUp');
-    // return;
+    navigation.navigate('SignUp');
+    return;
     signInWithKakao();
   }, []);
 
