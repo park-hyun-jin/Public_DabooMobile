@@ -21,7 +21,7 @@ const TabNavigation = () => {
               ? 'tips-and-updates'
               : 'tips-and-updates-outline';
           } else if (route.name === 'Ranking') {
-            iconName = focused ? 'ranking-star' : 'ranking-star-outline';
+            iconName = focused ? 'stats-chart' : 'stats-chart-outline';
           } else if (route.name === 'Mypage') {
             iconName = focused ? 'person' : 'person-outline';
           }
