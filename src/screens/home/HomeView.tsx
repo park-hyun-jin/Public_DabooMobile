@@ -17,6 +17,7 @@ import useStore from '../../zustand/store';
 const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
+    backgroundColor: 'white',
   },
   sectionContainer1: {
     paddingHorizontal: 10,
@@ -44,6 +45,10 @@ const styles = StyleSheet.create({
   scene: {
     flex: 1,
     borderTopWidth: 0.5,
+  },
+  footer: {
+    paddingHorizontal: 18,
+    paddingBottom: 30,
   },
 });
 
@@ -177,7 +182,7 @@ const HomeView = () => {
 
   return (
     <View style={styles.mainContainer}>
-      <View style={{backgroundColor: '#F5FCEF', width: '100%', height: 300}}>
+      <View style={{backgroundColor: '#F5FCEF', width: '100%', height: 260}}>
         <View
           style={{
             paddingTop: 20,
@@ -250,6 +255,9 @@ const HomeView = () => {
           initialLayout={initialLayout}
           renderTabBar={renderTabBar}
         />
+      </View>
+
+      <View style={styles.footer}>
         <TouchableOpacity
           style={{
             alignItems: 'center',
@@ -257,12 +265,23 @@ const HomeView = () => {
             backgroundColor: '#7261FF',
             justifyContent: 'center',
             borderRadius: 8,
+            marginBottom: 5,
           }}
           onPress={() => {}}>
           <Text style={{color: 'white', fontSize: 16}}>새로운 모임 만들기</Text>
         </TouchableOpacity>
+        <View
+          style={{
+            flexDirection: 'row',
+            marginTop: 5,
+            justifyContent: 'center',
+          }}>
+          <View style={{marginRight: 8}}>
+            <Image source={require('../../assets/home-explain.png')} />
+          </View>
+          <Text>함께모으기 모임은?</Text>
+        </View>
       </View>
-      <View></View>
     </View>
   );
 };

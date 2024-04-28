@@ -4,7 +4,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import HomeView from '../home/HomeView';
 import HoneyTipView from '../honeytip/HoneyTipView';
 import RankingView from '../ranking/RankingView';
-import MypageView from '../mypage/MypageView';
+import MypageNavigation from '../mypage/MypageNavigation';
 
 const Tab = createBottomTabNavigator();
 const TabNavigation = () => {
@@ -14,15 +14,15 @@ const TabNavigation = () => {
         tabBarIcon: ({focused, color, size}) => {
           let iconName;
 
-          if (route.name === 'Home') {
+          if (route.name === '홈') {
             iconName = focused ? 'home' : 'home-outline';
-          } else if (route.name === 'HoneyTip') {
+          } else if (route.name === '꿀팁') {
             iconName = focused
               ? 'tips-and-updates'
               : 'tips-and-updates-outline';
-          } else if (route.name === 'Ranking') {
+          } else if (route.name === '랭킹') {
             iconName = focused ? 'stats-chart' : 'stats-chart-outline';
-          } else if (route.name === 'Mypage') {
+          } else if (route.name === '마이') {
             iconName = focused ? 'person' : 'person-outline';
           }
 
@@ -30,23 +30,23 @@ const TabNavigation = () => {
         },
       })}>
       <Tab.Screen
-        name="Home"
+        name="홈"
         component={HomeView}
         options={{headerShown: false}}
       />
       <Tab.Screen
-        name="HoneyTip"
+        name="꿀팁"
         component={HoneyTipView}
         options={{headerShown: false}}
       />
       <Tab.Screen
-        name="Ranking"
+        name="랭킹"
         component={RankingView}
         options={{headerShown: false}}
       />
       <Tab.Screen
-        name="Mypage"
-        component={MypageView}
+        name="마이"
+        component={MypageNavigation}
         options={{headerShown: false}}
       />
     </Tab.Navigator>

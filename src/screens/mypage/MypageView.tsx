@@ -1,7 +1,10 @@
-import React from 'react';
+import React, {useCallback} from 'react';
 import {View, Text, StyleSheet, Image, TouchableOpacity} from 'react-native';
 
-const MypageView = () => {
+const MypageView = ({navigation}) => {
+  const moveSettingView = useCallback(() => {
+    navigation.navigate('Setting');
+  }, []);
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -41,9 +44,9 @@ const MypageView = () => {
           </View>
         </View>
         <View style={{}}>
-          <View style={{}}>
+          <TouchableOpacity style={{}} onPress={() => moveSettingView()}>
             <Image source={require('../../assets/mypage-setting.png')} />
-          </View>
+          </TouchableOpacity>
         </View>
       </View>
       <View style={styles.groupStatus}>
@@ -191,6 +194,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'white',
+    flex: 1,
   },
   text: {
     fontSize: 24,
@@ -230,8 +234,8 @@ const styles = StyleSheet.create({
     borderBottomWidth: 8,
   },
   footer: {
-    width: '100%',
-    height: 218,
+    // width: '100%',
+    flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
   },
