@@ -16,9 +16,14 @@ const SettingView = ({navigation}) => {
   const [age, setAge] = useState<number>(0);
   const [gender, setGender] = useState('여성');
   const accessToken = useStore(state => state.accessToken);
+  const [checkedProfile, setCheckedProfile] = useState<string>('profile1');
 
   const goBackMain = useCallback(() => {
     navigation.goBack();
+  }, []);
+
+  const onClickProfile = useCallback((profileValue: string) => {
+    setCheckedProfile(profileValue);
   }, []);
 
   const checkNickname = async (): Promise<void> => {
@@ -70,7 +75,7 @@ const SettingView = ({navigation}) => {
           />
         </TouchableOpacity>
         <Text style={{fontWeight: 'bold', fontSize: 16, color: '#212121'}}>
-          마이페이지
+          개인정보설정
         </Text>
         <View
           style={{
@@ -86,6 +91,127 @@ const SettingView = ({navigation}) => {
           />
         </View>
       </View>
+      <View style={styles.profileContainer}>
+        <View style={{marginBottom: 20}}>
+          <Text style={{fontSize: 16, fontWeight: '600', color: 'black'}}>
+            프로필 커버
+          </Text>
+        </View>
+        <View style={{flexDirection: 'row'}}>
+          <View
+            style={{
+              borderWidth: 1,
+              borderRadius: 8,
+              borderColor: checkedProfile == 'profile1' ? '#7744FF' : '#DDDDDD',
+              width: 103,
+              height: 120,
+              alignItems: 'center',
+              justifyContent: 'center',
+              marginRight: 10,
+              shadowColor: 'white',
+              opacity: checkedProfile == 'profile1' ? 1 : 0.5,
+              shadowOffset: {
+                width: 0,
+                height: 2,
+              },
+              shadowOpacity: 0.8, // 그림자 투명도
+              shadowRadius: 4, // 그림자 반경
+              elevation: 20, // 안드로이드에서 그림자 표현을 위한 속성
+            }}>
+            <TouchableOpacity
+              onPress={() => {
+                onClickProfile('profile1');
+              }}>
+              <Image source={require('../../assets/profile1.png')} />
+            </TouchableOpacity>
+            {checkedProfile == 'profile1' && (
+              <Image
+                style={{
+                  position: 'absolute',
+                  bottom: 3,
+                  right: 3,
+                }}
+                source={require('../../assets/setting-represent.png')}
+              />
+            )}
+          </View>
+          <View
+            style={{
+              borderWidth: 1,
+              borderRadius: 8,
+              borderColor: checkedProfile == 'profile2' ? '#7744FF' : '#DDDDDD',
+              width: 103,
+              height: 120,
+              alignItems: 'center',
+              justifyContent: 'center',
+              marginRight: 10,
+              shadowColor: 'white',
+              opacity: checkedProfile == 'profile2' ? 1 : 0.5,
+              shadowOffset: {
+                width: 0,
+                height: 2,
+              },
+              shadowOpacity: 0.8, // 그림자 투명도
+              shadowRadius: 4, // 그림자 반경
+              elevation: 20, // 안드로이드에서 그림자 표현을 위한 속성
+            }}>
+            <TouchableOpacity
+              onPress={() => {
+                onClickProfile('profile2');
+              }}>
+              <Image source={require('../../assets/profile2.png')} />
+            </TouchableOpacity>
+            {checkedProfile == 'profile2' && (
+              <Image
+                style={{
+                  position: 'absolute',
+                  bottom: 3,
+                  right: 3,
+                }}
+                source={require('../../assets/setting-represent.png')}
+              />
+            )}
+          </View>
+          <View
+            style={{
+              borderWidth: 1,
+              borderRadius: 8,
+              borderColor: checkedProfile == 'profile3' ? '#7744FF' : '#DDDDDD',
+              width: 103,
+              height: 120,
+              alignItems: 'center',
+              justifyContent: 'center',
+              shadowColor: 'white',
+              opacity: checkedProfile == 'profile3' ? 1 : 0.5,
+              shadowOffset: {
+                width: 0,
+                height: 2,
+              },
+              shadowOpacity: 0.8, // 그림자 투명도
+              shadowRadius: 4, // 그림자 반경
+              elevation: 20, // 안드로이드에서 그림자 표현을 위한 속성
+            }}>
+            <TouchableOpacity
+              onPress={() => {
+                onClickProfile('profile3');
+              }}>
+              <Image source={require('../../assets/profile3.png')} />
+            </TouchableOpacity>
+            {checkedProfile == 'profile3' && (
+              <Image
+                style={{
+                  position: 'absolute',
+                  bottom: 3,
+                  right: 3,
+                }}
+                source={require('../../assets/setting-represent.png')}
+              />
+            )}
+          </View>
+        </View>
+      </View>
+      <View
+        style={{height: 8, backgroundColor: '#F5F5F5', width: '100%'}}></View>
       <View style={styles.content}>
         <View style={styles.infoContainer2}>
           <Text style={styles.infoText2}>닉네임*</Text>
@@ -97,6 +223,7 @@ const SettingView = ({navigation}) => {
                 borderWidth: 1,
                 borderRadius: 8,
                 marginRight: 9,
+                paddingHorizontal: 10,
               }}></TextInput>
             <TouchableOpacity
               style={{
@@ -167,10 +294,12 @@ const SettingView = ({navigation}) => {
 
 const styles = StyleSheet.create({
   container: {
-    // justifyContent: 'center',
-    alignItems: 'center',
     backgroundColor: 'white',
     flex: 1,
+  },
+  profileContainer: {
+    paddingHorizontal: 18,
+    paddingVertical: 30,
   },
   text: {
     fontSize: 24,
@@ -183,16 +312,6 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     justifyContent: 'center',
     alignItems: 'center',
-  },
-  profile: {
-    height: 80,
-    alignItems: 'center',
-    width: '100%',
-    borderBottomColor: '#F5F5F5',
-    borderBottomWidth: 8,
-    flexDirection: 'row',
-    paddingHorizontal: 20,
-    justifyContent: 'space-between',
   },
   groupStatus: {
     height: 180,
@@ -223,6 +342,7 @@ const styles = StyleSheet.create({
   content: {
     // paddingHorizontal: 18,
     paddingVertical: 30,
+    alignItems: 'center',
   },
 
   infoContainer2: {
