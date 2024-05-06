@@ -7,6 +7,8 @@ import {
   TouchableOpacity,
   TextInput,
   Alert,
+  Modal,
+  Pressable,
 } from 'react-native';
 import {axiosGet} from '../../common/axios';
 import useStore from '../../zustand/store';
@@ -17,6 +19,21 @@ const SettingView = ({navigation}) => {
   const [gender, setGender] = useState('여성');
   const accessToken = useStore(state => state.accessToken);
   const [checkedProfile, setCheckedProfile] = useState<string>('profile1');
+  const [modalVisible, setModalVisible] = useState(false);
+
+  const showAlert = () => {
+    setModalVisible(true);
+  };
+
+  const handleCancel = () => {
+    setModalVisible(false);
+    // 취소 버튼 클릭 시 처리할 로직 추가
+  };
+
+  const handleConfirm = () => {
+    setModalVisible(false);
+    // 확인 버튼 클릭 시 처리할 로직 추가
+  };
 
   const goBackMain = useCallback(() => {
     navigation.goBack();
@@ -46,22 +63,96 @@ const SettingView = ({navigation}) => {
   };
 
   const onClicWithdrawal = useCallback(() => {
-    Alert.alert(
-      '정말 이대로 탈퇴하시겠어요?',
-      '\n탈퇴버튼 선택 시 계정이 삭제되며,\n데이터는 복구되지 않아요',
-      [
-        {
-          text: '취소',
-          onPress: () => console.log('Cancel Pressed'),
-          style: 'cancel',
-        },
-        {text: '확인', onPress: () => console.log('OK Pressed')},
-      ],
-      {cancelable: false},
-    );
+    setModalVisible(true);
+    // Alert.alert(
+    //   '정말 이대로 탈퇴하시겠어요?',
+    //   '\n탈퇴버튼 선택 시 계정이 삭제되며,\n데이터는 복구되지 않아요',
+    //   [
+    //     {
+    //       text: '취소',
+    //       onPress: () => console.log('Cancel Pressed'),
+    //       style: 'cancel',
+    //     },
+    //     {text: '확인', onPress: () => console.log('OK Pressed')},
+    //   ],
+    //   {cancelable: false},
+    // );
   }, []);
   return (
     <View style={styles.container}>
+      <Modal
+        animationType="fade"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => {
+          setModalVisible(!modalVisible);
+        }}>
+        <View
+          style={{
+            flex: 1,
+            justifyContent: 'center',
+            alignItems: 'center',
+            backgroundColor: 'rgba(117,117,117,0.8)',
+          }}>
+          <View
+            style={{
+              width: 310,
+              height: 197,
+              padding: 20,
+              backgroundColor: 'white',
+              opacity: 1,
+              borderRadius: 10,
+            }}>
+            <Text
+              style={{
+                fontSize: 16,
+                fontWeight: 'bold',
+                color: '#212121',
+                marginBottom: 18,
+              }}>
+              정말 이대로 탈퇴하시겠어요?
+            </Text>
+            <Text style={{color: '#616161'}}>
+              탈퇴버튼 선택 시 계정이 삭제되며,{'\n'}데이터는 복구되지 않아요
+            </Text>
+            <View
+              style={{
+                flexDirection: 'row',
+                position: 'absolute',
+                bottom: 20,
+                right: 20,
+              }}>
+              <Pressable
+                style={{
+                  backgroundColor: 'white',
+                  width: 58,
+                  height: 34,
+                  borderWidth: 1,
+                  borderRadius: 6,
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  marginRight: 8,
+                }}
+                onPress={() => setModalVisible(!modalVisible)}>
+                <Text style={{color: '#212121'}}>취소</Text>
+              </Pressable>
+              <Pressable
+                style={{
+                  backgroundColor: '#212121',
+                  width: 58,
+                  height: 34,
+                  borderWidth: 1,
+                  borderRadius: 6,
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}
+                onPress={() => setModalVisible(!modalVisible)}>
+                <Text style={{color: 'white'}}>확인</Text>
+              </Pressable>
+            </View>
+          </View>
+        </View>
+      </Modal>
       <View style={styles.header}>
         <TouchableOpacity
           style={styles.arrowBack}

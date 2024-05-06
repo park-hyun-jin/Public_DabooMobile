@@ -13,6 +13,8 @@ import {
 import {TabView, TabBar, SceneMap} from 'react-native-tab-view';
 import {axiosGet} from '../../common/axios';
 import useStore from '../../zustand/store';
+import {RadioButton} from 'react-native-paper';
+import React from 'react';
 
 const styles = StyleSheet.create({
   mainContainer: {
@@ -52,19 +54,6 @@ const styles = StyleSheet.create({
   },
 });
 
-// 탭 화면 컴포넌트들
-const FirstRoute = () => (
-  <View style={[styles.scene, {}]}>
-    <Text>First Route</Text>
-  </View>
-);
-
-const SecondRoute = () => (
-  <View style={[styles.scene, {}]}>
-    <Text>Second Route</Text>
-  </View>
-);
-
 const initialLayout = {width: Dimensions.get('window').width - 20};
 const HomeView = () => {
   const [index, setIndex] = useState(0);
@@ -73,7 +62,83 @@ const HomeView = () => {
     {key: 'second', title: '모임 둘러보기'},
   ]);
   const {accessToken} = useStore(state => state);
+  const [checked, setChecked] = useState('recruiting');
 
+  // 탭 화면 컴포넌트들
+  const FirstRoute = React.memo(() => {
+    return (
+      <View style={[styles.scene, {}]}>
+        <View style={{paddingVertical: 18}}>
+          <RadioButton.Group
+            onValueChange={newValue => setChecked(newValue)}
+            value={checked}>
+            <View
+              style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+                width: 70,
+                height: 32,
+              }}>
+              <RadioButton value="recruiting" />
+              <Text style={{fontSize: 12, color: '#757575'}}>모집중</Text>
+            </View>
+            <View
+              style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+                width: 70,
+                height: 32,
+              }}>
+              <RadioButton value="recruited" />
+              <Text style={{fontSize: 12, color: '#757575'}}>마감 된 모집</Text>
+            </View>
+          </RadioButton.Group>
+        </View>
+
+        <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+          <View style={{marginLeft: 10}}>
+            <Image source={require('../../assets/group-temp1.png')} />
+          </View>
+          <View style={{marginRight: 10}}>
+            <Image source={require('../../assets/group-temp2.png')} />
+          </View>
+        </View>
+      </View>
+    );
+  });
+
+  const SecondRoute = React.memo(() => {
+    return (
+      <View style={[styles.scene, {}]}>
+        <View style={{paddingVertical: 18}}>
+          <RadioButton.Group
+            onValueChange={newValue => setChecked(newValue)}
+            value={checked}>
+            <View
+              style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+                width: 70,
+                height: 32,
+              }}>
+              <RadioButton value="recruiting" />
+              <Text style={{fontSize: 12, color: '#757575'}}>모집중</Text>
+            </View>
+            <View
+              style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+                width: 70,
+                height: 32,
+              }}>
+              <RadioButton value="recruited" />
+              <Text style={{fontSize: 12, color: '#757575'}}>마감 된 모집</Text>
+            </View>
+          </RadioButton.Group>
+        </View>
+      </View>
+    );
+  });
   const renderScene = SceneMap({
     first: FirstRoute,
     second: SecondRoute,
@@ -160,19 +225,17 @@ const HomeView = () => {
       {...props}
       indicatorStyle={{backgroundColor: '#8E81FF'}}
       style={{
-        backgroundColor: undefined,
-        width: 210,
+        backgroundColor: 'white',
+        width: 'auto',
         shadowOffset: {height: 0, width: 0},
         shadowColor: 'transparent',
-        justifyContent: 'flex-start',
       }}
       renderLabel={({route, focused, color}) => (
         <Text
           style={{
             color: focused ? '#7261FF' : '#212121',
-            fontSize: 14,
-            fontWeight: focused ? 'bold' : undefined,
-            textAlign: 'left',
+            fontSize: 16,
+            fontWeight: 'bold',
           }}>
           {route.title}
         </Text>
@@ -182,7 +245,7 @@ const HomeView = () => {
 
   return (
     <View style={styles.mainContainer}>
-      <View style={{backgroundColor: '#F5FCEF', width: '100%', height: 260}}>
+      <View style={{backgroundColor: '#F5FCEF', width: '100%', height: 240}}>
         <View
           style={{
             paddingTop: 20,
@@ -218,7 +281,7 @@ const HomeView = () => {
             justifyContent: 'center',
             flexDirection: 'row',
             alignItems: 'center',
-            height: 80,
+            height: 70,
             width: '100%',
             paddingHorizontal: 15,
           }}>
@@ -238,13 +301,13 @@ const HomeView = () => {
         </View>
       </View>
 
-      <View style={{marginTop: 30, paddingHorizontal: 10, flex: 1}}>
+      <View style={{marginTop: 15, paddingHorizontal: 10, flex: 1}}>
         <Text
           style={{
             fontSize: 20,
             fontWeight: 'bold',
             color: '#212121',
-            marginBottom: 15,
+            marginBottom: 5,
           }}>
           함께모으기 모임
         </Text>
