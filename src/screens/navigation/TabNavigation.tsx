@@ -1,10 +1,10 @@
 import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import HomeView from '../home/HomeView';
 import HoneyTipView from '../honeytip/HoneyTipView';
 import RankingView from '../ranking/RankingView';
 import MypageNavigation from '../mypage/MypageNavigation';
+import HomeNavigation from '../home/HomeNavigation';
 
 const Tab = createBottomTabNavigator();
 const TabNavigation = () => {
@@ -31,7 +31,7 @@ const TabNavigation = () => {
       })}>
       <Tab.Screen
         name="홈"
-        component={HomeView}
+        component={HomeNavigation}
         options={{headerShown: false}}
       />
       <Tab.Screen

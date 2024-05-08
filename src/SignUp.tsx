@@ -20,6 +20,7 @@ import useStore from './zustand/store';
 const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
+    backgroundColor: 'white',
   },
   headerContainer: {
     height: 52,
@@ -269,7 +270,9 @@ const SignUp = ({navigation, route}) => {
             </Text>
           </View>
           <View style={styles.infoContainer2}>
-            <Text style={styles.infoText2}>닉네임*</Text>
+            <Text style={styles.infoText2}>
+              닉네임<Text style={{color: '#7261FF'}}>*</Text>
+            </Text>
             <View style={{flexDirection: 'row', height: 42, marginTop: 8}}>
               <TextInput
                 value={nickname}
@@ -297,7 +300,9 @@ const SignUp = ({navigation, route}) => {
             </Text>
           </View>
           <View style={styles.infoContainer3}>
-            <Text style={styles.infoText3}>나이*</Text>
+            <Text style={styles.infoText3}>
+              나이<Text style={{color: '#7261FF'}}>*</Text>
+            </Text>
             <View
               style={{
                 flexDirection: 'row',
@@ -324,7 +329,9 @@ const SignUp = ({navigation, route}) => {
             </View>
           </View>
           <View style={styles.infoContainer4}>
-            <Text style={styles.infoText4}>성별*</Text>
+            <Text style={styles.infoText4}>
+              성별<Text style={{color: '#7261FF'}}>*</Text>
+            </Text>
             <RadioButton.Group
               onValueChange={newValue => setChecked(newValue)}
               value={checked}>
@@ -335,13 +342,18 @@ const SignUp = ({navigation, route}) => {
                   borderWidth: 1,
                   borderRadius: 8,
                   marginTop: 8,
-                  borderColor: '#9E9E9E',
+                  borderColor: checked == 'female' ? '#7261FF' : '#9E9E9E',
                   marginRight: 8,
                   width: 81,
                   height: 42,
+                  backgroundColor:
+                    checked == 'female' ? 'rgba(130, 115,255, 0.2)' : 'white',
                 }}>
                 <RadioButton value="female" />
-                <Text>여성</Text>
+                <Text
+                  style={{color: checked == 'female' ? '#7261FF' : '#9E9E9E'}}>
+                  여성
+                </Text>
               </View>
               <View
                 style={{
@@ -350,13 +362,18 @@ const SignUp = ({navigation, route}) => {
                   borderWidth: 1,
                   borderRadius: 8,
                   marginTop: 8,
-                  borderColor: '#9E9E9E',
+                  borderColor: checked == 'male' ? '#7261FF' : '#9E9E9E',
                   marginRight: 8,
                   width: 81,
                   height: 42,
+                  backgroundColor:
+                    checked == 'male' ? 'rgba(130, 115,255, 0.2)' : 'white',
                 }}>
                 <RadioButton value="male" />
-                <Text>남성</Text>
+                <Text
+                  style={{color: checked == 'male' ? '#7261FF' : '#9E9E9E'}}>
+                  남성
+                </Text>
               </View>
               <View
                 style={{
@@ -365,12 +382,19 @@ const SignUp = ({navigation, route}) => {
                   borderWidth: 1,
                   borderRadius: 8,
                   marginTop: 8,
-                  borderColor: '#9E9E9E',
+                  borderColor: checked == 'unselect' ? '#7261FF' : '#9E9E9E',
                   width: 105,
                   height: 42,
+                  backgroundColor:
+                    checked == 'unselect' ? 'rgba(130, 115,255, 0.2)' : 'white',
                 }}>
                 <RadioButton value="unselect" />
-                <Text>선택안함</Text>
+                <Text
+                  style={{
+                    color: checked == 'unselect' ? '#7261FF' : '#9E9E9E',
+                  }}>
+                  선택안함
+                </Text>
               </View>
             </RadioButton.Group>
           </View>

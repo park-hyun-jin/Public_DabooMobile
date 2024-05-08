@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useCallback, useState} from 'react';
 import {
   View,
   Text,
@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
 });
 
 const initialLayout = {width: Dimensions.get('window').width - 20};
-const HomeView = () => {
+const HomeView = ({navigation}) => {
   const [index, setIndex] = useState(0);
   const [routes] = useState([
     {key: 'first', title: '나의 모임'},
@@ -143,6 +143,10 @@ const HomeView = () => {
     first: FirstRoute,
     second: SecondRoute,
   });
+
+  const onClickMakeGroup = useCallback(() => {
+    navigation.navigate('MakeGroup');
+  }, []);
 
   // 상단 집 모양, 포인트 정보 가져오기
   const getMyWallet = async (): Promise<void> => {
@@ -330,7 +334,7 @@ const HomeView = () => {
             borderRadius: 8,
             marginBottom: 5,
           }}
-          onPress={() => {}}>
+          onPress={() => onClickMakeGroup()}>
           <Text style={{color: 'white', fontSize: 16}}>새로운 모임 만들기</Text>
         </TouchableOpacity>
         <View
