@@ -14,6 +14,7 @@ import {axiosGet} from '../../common/axios';
 import useStore from '../../zustand/store';
 import {Picker} from '@react-native-picker/picker';
 import {RadioButton} from 'react-native-paper';
+import Slider from '@react-native-community/slider';
 
 const MakeGroupView = ({navigation}) => {
   const [value, setValue] = useState('');
@@ -27,6 +28,7 @@ const MakeGroupView = ({navigation}) => {
   const [groupName, setGroupName] = useState('');
   const [checked, setChecked] = useState<'2' | '3'>('2');
   const [period, setPeriod] = useState('');
+  const [amount, setAmount] = useState(10);
 
   const goBackMain = useCallback(() => {
     navigation.goBack();
@@ -38,6 +40,10 @@ const MakeGroupView = ({navigation}) => {
 
   const onClickProfile = useCallback((profileValue: string) => {
     setCheckedProfile(profileValue);
+  }, []);
+
+  const onMakeGroup = useCallback(() => {
+    navigation.navigate('HomeView');
   }, []);
 
   const checkNickname = async (): Promise<void> => {
@@ -94,9 +100,9 @@ const MakeGroupView = ({navigation}) => {
               style={{
                 height: 42,
                 width: 110,
-                borderWidth: 1,
+                borderWidth: 1.4,
+                borderColor: '#BDBDBD',
                 borderRadius: 8,
-                borderColor: 'black',
                 justifyContent: 'center',
               }}>
               <Picker
@@ -127,9 +133,11 @@ const MakeGroupView = ({navigation}) => {
               value={groupName}
               onChangeText={text => setGroupName(text)}
               placeholder="15자 이내로 입력해주세요."
+              maxLength={15}
               style={{
                 width: 250,
-                borderWidth: 1,
+                borderWidth: 1.4,
+                borderColor: '#BDBDBD',
                 borderRadius: 8,
                 marginRight: 9,
                 color: '#9E9E9E',
@@ -213,6 +221,70 @@ const MakeGroupView = ({navigation}) => {
             <Text style={{color: 'black'}}>일</Text>
           </View>
         </View>
+        <View style={styles.infoContainer2}>
+          <Text style={styles.infoText2}>
+            모임설명<Text style={{color: '#7261FF'}}>*</Text>
+          </Text>
+          <View style={{flexDirection: 'row', height: 42, marginTop: 8}}>
+            <TextInput
+              value={groupName}
+              onChangeText={text => setGroupName(text)}
+              placeholder="70자 이내로 입력해주세요."
+              maxLength={70}
+              style={{
+                width: 250,
+                borderWidth: 1.4,
+                borderColor: '#BDBDBD',
+                borderRadius: 8,
+                marginRight: 9,
+                color: '#9E9E9E',
+                paddingHorizontal: 10,
+                // fontSize: 16,
+              }}></TextInput>
+          </View>
+        </View>
+        <View style={styles.infoContainer2}>
+          <Text style={styles.infoText2}>
+            목표금액<Text style={{color: '#7261FF'}}>*</Text>
+          </Text>
+          <View style={{height: 42, marginTop: 8, marginBottom: 8}}>
+            <View
+              style={{
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+                paddingHorizontal: 15,
+              }}>
+              <Text>
+                최소 <Text style={{color: '#7261FF'}}>10원</Text>
+              </Text>
+              <Text>
+                최대 <Text style={{color: '#7261FF'}}>10,000원</Text>
+              </Text>
+            </View>
+            <Slider
+              value={amount}
+              onValueChange={newValue => setAmount(newValue)}
+              style={{width: '100%', height: 40}}
+              minimumValue={10}
+              maximumValue={10000}
+              minimumTrackTintColor="#7261FF"
+              maximumTrackTintColor="#000000"
+              step={4}
+            />
+          </View>
+          <Text>{amount}</Text>
+        </View>
+      </View>
+      <View style={styles.footerContainer}>
+        <TouchableOpacity
+          style={{
+            width: '100%',
+          }}
+          onPress={() => {
+            onMakeGroup();
+          }}>
+          <Text style={styles.footerText}>만들기</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
@@ -284,6 +356,24 @@ const styles = StyleSheet.create({
   middle: {
     paddingHorizontal: 18,
     paddingVertical: 25,
+  },
+
+  footerContainer: {
+    height: 52,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#7261FF',
+    bottom: 0,
+    position: 'absolute',
+    width: '100%',
+  },
+
+  footerText: {
+    textAlign: 'center',
+    fontWeight: 'bold',
+    fontSize: 16,
+    color: 'white',
+    fontFamily: 'SemiBold',
   },
 });
 

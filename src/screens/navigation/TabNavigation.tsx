@@ -17,9 +17,7 @@ const TabNavigation = () => {
           if (route.name === '홈') {
             iconName = focused ? 'home' : 'home-outline';
           } else if (route.name === '꿀팁') {
-            iconName = focused
-              ? 'tips-and-updates'
-              : 'tips-and-updates-outline';
+            iconName = focused ? 'bulb' : 'bulb-outline';
           } else if (route.name === '랭킹') {
             iconName = focused ? 'stats-chart' : 'stats-chart-outline';
           } else if (route.name === '마이') {

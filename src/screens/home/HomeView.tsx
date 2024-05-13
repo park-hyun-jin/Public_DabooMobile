@@ -64,6 +64,12 @@ const HomeView = ({navigation}) => {
   const {accessToken} = useStore(state => state);
   const [checked, setChecked] = useState('recruiting');
 
+  const onParticipateGroup = useCallback(() => {
+    navigation.navigate('ParticipateGroup');
+  }, []);
+
+  const onClickGroupDetail = useCallback(() => {}, []);
+
   // 탭 화면 컴포넌트들
   const FirstRoute = React.memo(() => {
     return (
@@ -97,7 +103,9 @@ const HomeView = ({navigation}) => {
 
         <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
           <View style={{marginLeft: 10}}>
-            <Image source={require('../../assets/group-temp1.png')} />
+            <TouchableOpacity onPress={() => onClickGroupDetail()}>
+              <Image source={require('../../assets/group-temp1.png')} />
+            </TouchableOpacity>
           </View>
           <View style={{marginRight: 10}}>
             <Image source={require('../../assets/group-temp2.png')} />
@@ -135,6 +143,16 @@ const HomeView = ({navigation}) => {
               <Text style={{fontSize: 12, color: '#757575'}}>마감 된 모집</Text>
             </View>
           </RadioButton.Group>
+        </View>
+        <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+          <View style={{marginLeft: 10}}>
+            <TouchableOpacity onPress={() => onParticipateGroup()}>
+              <Image source={require('../../assets/group-temp1.png')} />
+            </TouchableOpacity>
+          </View>
+          <View style={{marginRight: 10}}>
+            <Image source={require('../../assets/group-temp2.png')} />
+          </View>
         </View>
       </View>
     );

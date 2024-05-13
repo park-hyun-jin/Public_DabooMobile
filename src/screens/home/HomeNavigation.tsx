@@ -3,6 +3,7 @@ import {useLayoutEffect} from 'react';
 import {getFocusedRouteNameFromRoute} from '@react-navigation/native';
 import HomeView from './HomeView';
 import MakeGroupView from './MakeGroupView';
+import ParticipateGroupView from './ParticipateGroupView';
 
 const Stack = createNativeStackNavigator();
 
@@ -24,6 +25,7 @@ const HomeNavigation = ({navigation, route}) => {
       }}>
       <Stack.Screen name="HomeView" component={HomeView} />
       <Stack.Screen name="MakeGroup" component={MakeGroupView} />
+      <Stack.Screen name="ParticipateGroup" component={ParticipateGroupView} />
     </Stack.Navigator>
   );
 };
