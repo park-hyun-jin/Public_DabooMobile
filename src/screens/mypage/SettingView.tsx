@@ -194,7 +194,7 @@ const SettingView = ({navigation}) => {
               borderWidth: 1,
               borderRadius: 8,
               borderColor: checkedProfile == 'profile1' ? '#7744FF' : '#DDDDDD',
-              width: 103,
+              flex: 1,
               height: 120,
               alignItems: 'center',
               justifyContent: 'center',
@@ -231,7 +231,7 @@ const SettingView = ({navigation}) => {
               borderWidth: 1,
               borderRadius: 8,
               borderColor: checkedProfile == 'profile2' ? '#7744FF' : '#DDDDDD',
-              width: 103,
+              flex: 1,
               height: 120,
               alignItems: 'center',
               justifyContent: 'center',
@@ -268,7 +268,7 @@ const SettingView = ({navigation}) => {
               borderWidth: 1,
               borderRadius: 8,
               borderColor: checkedProfile == 'profile3' ? '#7744FF' : '#DDDDDD',
-              width: 103,
+              flex: 1,
               height: 120,
               alignItems: 'center',
               justifyContent: 'center',
@@ -306,11 +306,17 @@ const SettingView = ({navigation}) => {
       <View style={styles.content}>
         <View style={styles.infoContainer2}>
           <Text style={styles.infoText2}>닉네임*</Text>
-          <View style={{flexDirection: 'row', height: 42, marginTop: 8}}>
+          <View
+            style={{
+              flexDirection: 'row',
+              height: 42,
+              marginTop: 8,
+              width: '100%',
+            }}>
             <TextInput
               value={nickname}
               style={{
-                width: 240,
+                flex: 1,
                 borderWidth: 1,
                 borderRadius: 8,
                 marginRight: 9,
@@ -340,10 +346,9 @@ const SettingView = ({navigation}) => {
               value={`만 ${age}세`}
               editable={false}
               style={{
-                width: 333,
+                flex: 1,
                 borderWidth: 1,
                 borderRadius: 8,
-                marginRight: 9,
                 backgroundColor: '#EEEEEE',
                 color: '#9E9E9E',
                 fontWeight: 'bold',
@@ -359,10 +364,9 @@ const SettingView = ({navigation}) => {
               value={gender}
               editable={false}
               style={{
-                width: 333,
+                flex: 1,
                 borderWidth: 1,
                 borderRadius: 8,
-                marginRight: 9,
                 backgroundColor: '#EEEEEE',
                 color: '#9E9E9E',
                 fontWeight: 'bold',
@@ -404,36 +408,15 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  groupStatus: {
-    height: 180,
-    width: '100%',
-    // justifyContent: 'center',
-    padding: 20,
-    borderBottomColor: '#F5F5F5',
-    borderBottomWidth: 8,
-  },
-  mypageInfo: {
-    padding: 20,
-    width: '100%',
-
-    borderBottomColor: '#F5F5F5',
-    borderBottomWidth: 8,
-  },
-  footer: {
-    width: '100%',
-    height: 218,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
   arrowBack: {
     position: 'absolute',
     left: 18,
     zIndex: 2,
   },
   content: {
-    // paddingHorizontal: 18,
+    paddingHorizontal: 18,
     paddingVertical: 30,
-    alignItems: 'center',
+    // alignItems: 'center',
   },
 
   infoContainer2: {

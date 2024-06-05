@@ -102,12 +102,15 @@ const HomeView = ({navigation}) => {
         </View>
 
         <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-          <View style={{marginLeft: 10}}>
+          <View style={{marginLeft: 10, width: '45%'}}>
             <TouchableOpacity onPress={() => onClickGroupDetail()}>
-              <Image source={require('../../assets/group-temp1.png')} />
+              <Image
+                style={{resizeMode: 'cover'}}
+                source={require('../../assets/group-temp1.png')}
+              />
             </TouchableOpacity>
           </View>
-          <View style={{marginRight: 10}}>
+          <View style={{width: '45%', alignItems: 'flex-end', marginRight: 10}}>
             <Image source={require('../../assets/group-temp2.png')} />
           </View>
         </View>
@@ -265,9 +268,13 @@ const HomeView = ({navigation}) => {
     />
   );
 
+  const onClickHome = useCallback(() => {
+    navigation.navigate('MyHome');
+  }, []);
+
   return (
     <View style={styles.mainContainer}>
-      <View style={{backgroundColor: '#F5FCEF', width: '100%', height: 240}}>
+      <View style={{backgroundColor: '#F5FCEF', width: '100%', height: '30%'}}>
         <View
           style={{
             paddingTop: 20,
@@ -278,11 +285,13 @@ const HomeView = ({navigation}) => {
           <Image source={require('../../assets/daboo.png')} />
         </View>
         <View style={styles.sectionContainer1}>
-          <Image
-            width={269}
-            height={269}
-            source={require('../../assets/home.png')}
-          />
+          <TouchableOpacity onPress={() => onClickHome()}>
+            <Image
+              width={269}
+              height={269}
+              source={require('../../assets/home.png')}
+            />
+          </TouchableOpacity>
         </View>
         <View
           style={{

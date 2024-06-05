@@ -15,6 +15,7 @@ import useStore from '../../zustand/store';
 import {Picker} from '@react-native-picker/picker';
 import {RadioButton} from 'react-native-paper';
 import Slider from '@react-native-community/slider';
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 
 const MakeGroupView = ({navigation}) => {
   const [value, setValue] = useState('');
@@ -90,7 +91,13 @@ const MakeGroupView = ({navigation}) => {
       </View>
       <View
         style={{backgroundColor: '#F5F5F5', height: 4, width: '100%'}}></View>
-      <View style={styles.content}>
+      <KeyboardAwareScrollView
+        style={styles.content}
+        scrollEnabled={true}
+        extraHeight={180}
+        resetScrollToCoords={{x: 0, y: 0}}
+        enableAutomaticScroll={true}
+        enableOnAndroid={true}>
         <View style={styles.infoContainer2}>
           <Text style={styles.infoText2}>
             앱테크 앱<Text style={{color: '#7261FF'}}>*</Text>
@@ -274,7 +281,7 @@ const MakeGroupView = ({navigation}) => {
           </View>
           <Text>{amount}</Text>
         </View>
-      </View>
+      </KeyboardAwareScrollView>
       <View style={styles.footerContainer}>
         <TouchableOpacity
           style={{
@@ -295,14 +302,6 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     flex: 1,
   },
-  profileContainer: {
-    paddingHorizontal: 18,
-    paddingVertical: 30,
-  },
-  text: {
-    fontSize: 24,
-    fontWeight: 'bold',
-  },
   header: {
     width: '100%',
     height: 48,
@@ -311,27 +310,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  groupStatus: {
-    height: 180,
-    width: '100%',
-    // justifyContent: 'center',
-    padding: 20,
-    borderBottomColor: '#F5F5F5',
-    borderBottomWidth: 8,
-  },
-  mypageInfo: {
-    padding: 20,
-    width: '100%',
-
-    borderBottomColor: '#F5F5F5',
-    borderBottomWidth: 8,
-  },
-  footer: {
-    width: '100%',
-    height: 218,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
   arrowBack: {
     position: 'absolute',
     left: 18,
@@ -339,12 +317,14 @@ const styles = StyleSheet.create({
   },
   content: {
     paddingHorizontal: 18,
-    paddingVertical: 18,
+    paddingVertical: 15,
+    flex: 1,
   },
 
   infoContainer2: {
     // width: '100%',
-    marginBottom: 20,
+    flex: 1,
+    marginVertical: 12,
   },
 
   infoText2: {
@@ -355,7 +335,8 @@ const styles = StyleSheet.create({
   },
   middle: {
     paddingHorizontal: 18,
-    paddingVertical: 25,
+    height: '11%',
+    justifyContent: 'center',
   },
 
   footerContainer: {
@@ -364,7 +345,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: '#7261FF',
     bottom: 0,
-    position: 'absolute',
     width: '100%',
   },
 

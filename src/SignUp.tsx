@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   contentContainer: {
-    paddingTop: 18,
+    flex: 1,
     // alignItems: 'center',
   },
   footerContainer: {
@@ -39,8 +39,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#7261FF',
-    bottom: 0,
-    position: 'absolute',
     width: '100%',
   },
   arrowBack: {
@@ -65,23 +63,29 @@ const styles = StyleSheet.create({
     // flex: 2,
     // width: '100%',
     // height: '100%',
+    width: '100%',
+    flex: 3,
   },
   detailContainer2: {
-    height: 15,
+    height: 8,
     width: '100%',
     backgroundColor: '#F5F5F5',
-    marginTop: 18,
+    marginTop: 15,
+    borderBottomWidth: 1,
+    borderColor: '#E0E0E0',
   },
   detailContainer3: {
     // flex: 1,
     // width: '100%',
     // height: '100%',
-    marginTop: 15,
+    width: '100%',
+    flex: 2,
   },
   infoContainer1: {
     width: '100%',
     paddingHorizontal: 18,
-    marginBottom: 40,
+    height: '25%',
+    justifyContent: 'center',
   },
   infoText1: {
     textAlign: 'left',
@@ -93,7 +97,7 @@ const styles = StyleSheet.create({
   infoContainer2: {
     width: '100%',
     paddingHorizontal: 18,
-    marginBottom: 20,
+    height: '25%',
   },
 
   infoText2: {
@@ -106,7 +110,7 @@ const styles = StyleSheet.create({
   infoContainer3: {
     width: '100%',
     paddingHorizontal: 18,
-    marginBottom: 20,
+    height: '25%',
   },
 
   infoText3: {
@@ -119,19 +123,20 @@ const styles = StyleSheet.create({
   infoContainer4: {
     width: '100%',
     paddingHorizontal: 18,
-    marginBottom: 20,
+    height: '25%',
   },
 
   infoContainer5: {
     width: '100%',
     paddingHorizontal: 18,
-    marginBottom: 20,
+    height: '30%',
+    justifyContent: 'center',
   },
 
   infoContainer6: {
     width: '100%',
     paddingHorizontal: 18,
-    marginBottom: 20,
+    height: '70%',
   },
 
   infoText4: {
@@ -277,14 +282,14 @@ const SignUp = ({navigation, route}) => {
               <TextInput
                 value={nickname}
                 style={{
-                  width: 240,
+                  width: '70%',
                   borderWidth: 1,
                   borderRadius: 8,
                   marginRight: 9,
                 }}></TextInput>
               <TouchableOpacity
                 style={{
-                  width: 85,
+                  width: '23%',
                   backgroundColor: '#7261FF',
                   alignItems: 'center',
                   justifyContent: 'center',
@@ -399,16 +404,7 @@ const SignUp = ({navigation, route}) => {
             </RadioButton.Group>
           </View>
         </View>
-        <View style={styles.detailContainer2}>
-          <View
-            style={{
-              height: 10,
-              width: '100%',
-              backgroundColor: '#E0E0E0',
-              borderBottomWidth: 1,
-              borderColor: '#F5F5F5',
-            }}></View>
-        </View>
+        <View style={styles.detailContainer2}></View>
         <View style={styles.detailContainer3}>
           <View style={styles.infoContainer5}>
             <Text style={{fontSize: 20, color: '#212121', fontWeight: 'bold'}}>

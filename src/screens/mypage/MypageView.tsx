@@ -70,20 +70,26 @@ const MypageView = ({navigation}) => {
             backgroundColor: '#F5F5F5',
             height: 80,
           }}>
-          <View style={{alignItems: 'center', width: 108}}>
+          <View style={{alignItems: 'center', flex: 1}}>
             <Text style={{color: '#8281FF', fontWeight: 'bold'}}>0</Text>
             <Text style={{color: '#757575', fontWeight: 'bold', fontSize: 14}}>
               참가중
             </Text>
           </View>
-          <View style={{alignItems: 'center', width: 108}}>
+          <View>
+            <Image source={require('../../assets/mypage-stroke.png')}></Image>
+          </View>
+          <View style={{alignItems: 'center', flex: 1}}>
             <Text style={{color: '#8281FF', fontWeight: 'bold'}}>0</Text>
 
             <Text style={{color: '#757575', fontWeight: 'bold', fontSize: 14}}>
               완료
             </Text>
           </View>
-          <View style={{alignItems: 'center', width: 108}}>
+          <View>
+            <Image source={require('../../assets/mypage-stroke.png')}></Image>
+          </View>
+          <View style={{alignItems: 'center', flex: 1}}>
             <Text style={{color: '#8281FF', fontWeight: 'bold'}}>0</Text>
 
             <Text style={{color: '#757575', fontWeight: 'bold', fontSize: 14}}>
@@ -161,7 +167,6 @@ const MypageView = ({navigation}) => {
             flexDirection: 'row',
             alignItems: 'center',
             justifyContent: 'space-between',
-            marginBottom: 20,
           }}>
           <Text style={{color: '#333333', fontWeight: 'bold', fontSize: 16}}>
             자주묻는질문
@@ -195,10 +200,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: 'white',
     flex: 1,
-  },
-  text: {
-    fontSize: 24,
-    fontWeight: 'bold',
   },
   header: {
     width: '100%',

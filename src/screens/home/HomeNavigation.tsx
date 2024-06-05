@@ -4,6 +4,7 @@ import {getFocusedRouteNameFromRoute} from '@react-navigation/native';
 import HomeView from './HomeView';
 import MakeGroupView from './MakeGroupView';
 import ParticipateGroupView from './ParticipateGroupView';
+import MyHomeView from './MyHomeView';
 
 const Stack = createNativeStackNavigator();
 
@@ -17,6 +18,7 @@ const HomeNavigation = ({navigation, route}) => {
       navigation.setOptions({tabBarStyle: {display: 'none'}});
     }
   }, [navigation, route]);
+
   return (
     <Stack.Navigator
       initialRouteName="HomeView"
@@ -26,6 +28,7 @@ const HomeNavigation = ({navigation, route}) => {
       <Stack.Screen name="HomeView" component={HomeView} />
       <Stack.Screen name="MakeGroup" component={MakeGroupView} />
       <Stack.Screen name="ParticipateGroup" component={ParticipateGroupView} />
+      <Stack.Screen name="MyHome" component={MyHomeView} />
     </Stack.Navigator>
   );
 };
